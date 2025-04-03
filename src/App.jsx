@@ -1,10 +1,12 @@
 import './App.css'
-
+import Head from "./Components/Head.jsx"
+import Body from "./Components/Body.jsx"
 function App() {
 
   return (
-  <div className = "bg-red-900">
-      Hello world
+  <div>
+      <Head />
+      <Body />
     </div>
 
   )
