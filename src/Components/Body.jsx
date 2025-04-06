@@ -4,7 +4,7 @@ import MainContainer from "./MainContailer.jsx"
 
 const Body = () =>{
   return(
-  <div>
+  <div className= "flex">
       <Sidebar />
       <MainContainer />
 
