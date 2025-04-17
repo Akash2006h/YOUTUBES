@@ -1,11 +1,18 @@
 import React from "react"
+import { useDispatch } from "react-redux";
+import {toggleMenu} from "../Utils/appSlice.jsx"
 const Head = () =>{
+  const dispatch = useDispatch();
+  const toggleMenuHandler = () =>{
+    dispatch(toggleMenu())
+  }
   return (
     <div>
         <div className = "grid grid-flow-col p-5 shadow-lg">
         <div className = "flex col-span-1">
         <img
-        className = "h-24"
+        onClick = {() => toggleMenuHandler()}
+        className = "h-24 cursor-pointer"
         alt = "HamBurger"
         src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAAYFBMVEX///8AAADy8vL5+fmioqIrKyt0dHTQ0NDf39/u7u719fVSUlJ/f3+7u7teXl6QkJDW1tbm5uYxMTFDQ0NpaWmcnJw9PT2urq4ODg60tLSKiorGxsY4ODioqKgUFBRXV1e2YQktAAACRUlEQVR4nO3d6U7DMAzA8bKOpe16baOwk73/W3JMSPAhhyUkJ9b/9wS2lKapkzpVBQAAAAAAAAAAUKq6W2WsqwWp7Nw07p+ztR8nt0tN5XR4yt7hlJSOe9EONM2Li+dy2WtHmWp/ieZy1Y4x3TWSTTNqRygxNqFc6kU7PpklNEe7V+3wZF5Dk8CbdnRSb/5c2o12cFKb1v/4FzbKPseZfwpw2rHJ+R8aktHlT2Y+ascmdZz9E8BWOziprX8CWJ21g5M6r7zJVIN2cFKDP5fC1pmxleZJOzyZUyiXqivqqTl3wWSqXUHLs020DND02jGm6oMPzEO7LuLL+br2L5h/c0v2L8/tklCbeagbN9zW2boNrpHUND8TypgoEQAAAAAAAOD/1NpHF0NEhbN2HqZNxqZhTis0V1V36d+1a8kxx/4S2Zt5aCbtSNNMCTsarphtzTG6ETDftWNMd/efaPhW0i5gdB/wph2fzC04yLLfMvtrGxpohR0DCB4EaIvZaf7RB441FvATwF8H/8tm1o5Nzv/QmDoJaCoZU8PM1ARgamo29dK0tZwxtdC09Qlg6uPM1mezrYKGrVJTZaoI+M1OeRYAAAAAAAD4R9q//IbIEjH0o7ahX+gtNTew1HaipH3A2C6gqVYthR0ECDbRMdXeyFLjKVMtwUw1azPVRs/USUCS0eVPxlS7VlONdE21OLbVfNpUW/DCVprhNpq2WunbuuTA1vUTti4G+UrHLfecr2y5L8lXtnwxdJkOAAAAAAAAAABAXj4AlepeD4L3RxcAAAAASUVORK5CYII=
 " />
