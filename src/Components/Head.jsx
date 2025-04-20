@@ -1,6 +1,7 @@
 import React from "react"
 import { useDispatch } from "react-redux";
 import {toggleMenu} from "../Utils/appSlice.jsx"
+import {Link} from "react-router-dom";
 const Head = () =>{
   const dispatch = useDispatch();
   const toggleMenuHandler = () =>{
@@ -19,7 +20,9 @@ const Head = () =>{
        <img
         className = "mx-2 h-24"
         src ="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAApVBMVEX/////AQH++vn///3qtrT7AAD3AADzAAD8////+/j0zczuAADrAAD73t32vb3//fz2RkXznZz0l5f1k5L78PD6xsX87OzvoKDyw8P94+P0NTXjAAD21NT85+ftcG/0UVD3PkDvamnmPz7xs7HzXV3yKCfsqqj0qqrwg4LuennzY2PxHx7yEhDpiIbvVVXuR0fgXV3hWFXlJifhTUviEhXeLy7hbm1sicV1AAAHVUlEQVR4nO2ca3eqOhCGIxFBEFF35GIBa1EriFq7u8///2knAa3Wui/NhMKHeVbr6sICeZmQTDLJEIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCPJPUMHng00U5Wucyv2h9JT8UUy7VZ3knExypYOej9DTt+SezHZwXXR655vbcp9F36uFLYNS13XLD1c7I46IA60oPz3/3KAx5sWhE1mWFQRBN03Xzz5nLJhMJj/O8L/LY+JLf71ep2m3y08I+HlWFDlhGHseY0xz79yXKn25yqd5uaDmhZEVpM/+eLLbZEmyyJfz0ehxNlttt4VtCHrlR4//VBgfsO2i2G5Xq9ns8XE0Gs3nyzxfJEmSZZvd2H8OIk97vzMxFb9d1dVM/htb/o4Xfn94nK2K4lxWXe/A0Dln3cV2Ns8Xmd91mLi3SU21Wk5vrOO/HGaFuDG08P8grliNfia+Uz5ClZRmocHLqle3iFtNxetLoFgNF2OGR/ublXAt4tc+Osp0cPijMYcP363kwkNK1DToZnUJv0Etnc5g7Kpp0crOZT1oUkunY481Ne4pv4j12qyWTmebKjENvwRb9JoWox8cBaYRz2O9bVpLp9Pb9RX4NJTE+be3yXcYWUq6z7QFhuGmmdy6oDKwjdG0EIGehwrERIemdVQUQwViunbTMipsH94AaJNW1DJezzIPLMZbNK3izB7ucLblleFegAUWE7Tklel0jBQsJm3JK8N7Gl/7e3H/iDZu3C87o28Ygc3TsKxpDRfyGOiexcumJVyYhUAxYeNDmQuFAxQTFU1LuDCwCAW5zlO5lrmWQYM9hA3Q3FRy9G/UIMd+hrXN2rNcN6Mnufr+yRhroIkAaTezG48Pqq3T+wEUs5EsUJdo1u5VrRo900CdJkskb8zFUBYkaufbEiYtRpzGcnkxmkvY8GAobNmODBR3YntpMf0y9sf8B3XO3Z6BOk0mO5oRltH6/b5LYnV17QlYzZ4gYgR9QqyjojHRKzMhYjxZ16yqZgKi8a53X6h4c95iaTEcM5YNZbxbpgybE29yUBB1e4il/RlxWqhEjIiHW5sZuCUYhPLOGT/PkX15r8WIpQ0u0YIMWtcGgFCAEKPCMm71Q1iaw+KiD0AxKixzhrqh/wTxPwcRaAwQyTaq98RofVdzdoC6ZkegoWak0jJlS6BFR+lO1LakxYjzLKWWEcbRTDJ9E+2ahIEgYnj9nMpW8d+JEZhk/CbV6xhTgGVqEFP6BYTE2Uqi1zGm8tMZ/ClMZTu6P1lGGIdaydfl9KbSWuoUw63D0sVXp7EA1UycOKxNjHDYvhot7QHEkDrFuKQfJF8VAwlrmmQo28P9TYxLos3sqxcXYgBNQC1i+rw588ajrxtdiJGvZ/WI4R3N+knGq4GIoTWI4f0MJc5Pue5LNM0QMcobAJfGmaxzZsDEqO5nXNcbP0i7zb2p/ByA8M2UiuFShk89+YAHxDJqfTO3z0fOyQAy1LQhKwEosZSIKSc3iWvtZLzLazERQApVN54hJPRH0JANSAwxVc0BELZewqNPA/nVM+rEEBokWwVTmiAxVMHsDOVawmylJK7xEJuQkSZserYaVlL/TVcTpHmFLNGgJpOfOK+aMeIO5TvJW54YbOkMID7T7/epFqkKZwj2oJVAJpNdOsPFuERzdkqDmjmDLKKngACt64b+o9L1XXrCQNOzgNC5ly4VLyLsbTTQXmJtLLlCIw0SJcGya4wxUIzscpO92hpWMijXzgDq2VCyqtSx1a5a1QSJaTS8p+kaQ97PrHBasUWjYgtdpR2OmpZwYRQC99K2Z/U87zM94FYtJtvRqKda1wxpAPqSbXMNGL5GYWLosD1i4HsBrNY0ZwV8l4Yzb1rEmTl8/4yXtKQF0BP4zqbWbNMq3UwobdlAM+jCtRCrJT7AErpHQ7TqbNOG7UC6sdMU7NRuxT7tjj4LlCSfacVG7XL8r0BMK0yz6irJByDW0Ddumt5GRTqAasZZdnWzKvRDDFdSyaHEajS5SUd/ixTlqyuvEambMJbUoi77lGl6L3ZNO8n+iv3imQpTHIk9eG76qxG/xviVumqTB5YmdofHVVF7/qwrRCatYyrS50jHmH6rh3+E6+x4mK22Rq/GrGBlrjNDZAT7zxdDGNhQ+bOQcmGEWe74dGMrWE82ySKfj6qEbe9Z1sqsbf+oUr9OzyYy0/HiF9vV7HE0X+aLJJusA0cjZdY5U22ytvdskpdnRJnnWMGwTKUncullWZIki8Uiz/P9fj6fH0ajU2I9kVdPpNGzRVlnM5E27zCf75e8zByROi/b7HYTkS3wOR0GluOx/iXv4+mm35gS0dUYYx4njsMwdJyIY50yHnbT9fN4wku6vmQ05F87jshpGMdlUsNPWQ2b4V6OzM+ItJPfURoop8Se75+Xvu094ye9/V96ne60RclOz6X4kJn1NpvpWcbVgfZzfsgnfXdk0Y//e/NnK8yDIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAiinP8B5HOdEZhPfccAAAAASUVORK5CYII=" /> 
+
         </div>
+
         <div className ="col-span-10 text-center">
           <input className = "w-1/2 border border-gray-400 p-2 rounded-l-full"
             type="text" />
