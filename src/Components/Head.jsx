@@ -2,11 +2,30 @@ import React from "react"
 import { useDispatch } from "react-redux";
 import {toggleMenu} from "../Utils/appSlice.jsx"
 import {Link} from "react-router-dom";
+import {YOUTUBE_SEARCH_API} from "../Utils/constant.jsx"
+import {useState, useEffect} from "react";
 const Head = () =>{
+  const [searchQuery, setSearchQuery] = useState("");
+  console.log(searchQuery)
   const dispatch = useDispatch();
   const toggleMenuHandler = () =>{
     dispatch(toggleMenu())
   }
+  useEffect(() =>{
+    console.log(searchQuery);
+    const timer = setTimeout(() => getSearchSuggestion(),200);
+  return() => {
+    clearTimeout(timer)
+  };
+  },[searchQuery])
+
+  const getSearchSuggestion = async() =>{
+    const data = await fetch (YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    console.log(json[1])
+  }
+
+
   return (
     <div>
         <div className = "grid grid-flow-col p-5 shadow-lg">
@@ -25,7 +44,11 @@ const Head = () =>{
 
         <div className ="col-span-10 text-center">
           <input className = "w-1/2 border border-gray-400 p-2 rounded-l-full"
-            type="text" />
+            type="text"
+            value = {searchQuery}
+            onChange = {(e) => setSearchQuery(e.target.value)}
+          />
+          
           <button className = "border border-gray-400 p-2 rounded-r-full bg-gray-100" >Search</button>
         </div>
 
