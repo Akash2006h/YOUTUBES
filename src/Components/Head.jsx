@@ -6,6 +6,7 @@ import {YOUTUBE_SEARCH_API} from "../Utils/constant.jsx"
 import {useState, useEffect} from "react";
 const Head = () =>{
   const [searchQuery, setSearchQuery] = useState("");
+  const [suggestion, setSuggestion] = useState([])
   console.log(searchQuery)
   const dispatch = useDispatch();
   const toggleMenuHandler = () =>{
@@ -19,10 +20,12 @@ const Head = () =>{
   };
   },[searchQuery])
 
+
   const getSearchSuggestion = async() =>{
     const data = await fetch (YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
     console.log(json[1])
+    setSuggestion(json[1])
   }
 
 
@@ -43,13 +46,22 @@ const Head = () =>{
         </div>
 
         <div className ="col-span-10 text-center">
+          <div>
           <input className = "w-1/2 border border-gray-400 p-2 rounded-l-full"
+
             type="text"
             value = {searchQuery}
             onChange = {(e) => setSearchQuery(e.target.value)}
           />
           
           <button className = "border border-gray-400 p-2 rounded-r-full bg-gray-100" >Search</button>
+        </div>
+          <div className = "fixed bg-white px-100 w-[37rem] shadow-lg rounded-lg border-gray-100">
+            <ul>             
+              {suggestion.map(s => <li key ={s} className = "py-2 shadow-sm border-gray-400 hover:bg-gray-100">{s}</li>
+)}
+            </ul>
+          </div>
         </div>
 
         <img
