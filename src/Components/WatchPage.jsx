@@ -2,6 +2,8 @@ import {useDispatch} from "react-redux";
 import {closeMenu} from "../Utils/appSlice.jsx"
 import {useEffect} from "react"
 import {useSearchParams} from "react-router-dom";
+import CommentsContainer from "./CommentsContainer.jsx"
+
 const WatchPage = () =>{
   const [searchParams] = useSearchParams();
   console.log(searchParams.get("v"))
@@ -11,6 +13,7 @@ const WatchPage = () =>{
   },[])
 
   return(
+    <>
     <div>
       <iframe width="1200" 
       height="600"
@@ -20,6 +23,8 @@ const WatchPage = () =>{
       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       
   </div>
+      <CommentsContainer />
+  </>
   )
 }
 export default WatchPage;

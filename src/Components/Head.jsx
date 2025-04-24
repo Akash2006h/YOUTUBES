@@ -1,24 +1,32 @@
-import React from "react"
-import { useDispatch } from "react-redux";
-import {toggleMenu} from "../Utils/appSlice.jsx"
+import React from "react";
+import { useDispatch, useSelector} from "react-redux";
+import {toggleMenu} from "../Utils/appSlice.jsx";
 import {Link} from "react-router-dom";
 import {YOUTUBE_SEARCH_API} from "../Utils/constant.jsx"
 import {useState, useEffect} from "react";
+import {cacheResults} from "../Utils/searchSlice.jsx";
+
 const Head = () =>{
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestion, setSuggestion] = useState([])
-  console.log(searchQuery)
+  const [showSuggestion, setShowSuggestion] = useState(true)
+  const searchCache = useSelector((store) => store.search)
   const dispatch = useDispatch();
+  console.log(searchQuery)
   const toggleMenuHandler = () =>{
     dispatch(toggleMenu())
   }
-  useEffect(() =>{
-    console.log(searchQuery);
-    const timer = setTimeout(() => getSearchSuggestion(),200);
-  return() => {
-    clearTimeout(timer)
-  };
-  },[searchQuery])
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    if (searchQuery && !searchCache[searchQuery]) {
+      getSearchSuggestion();
+    } else if (searchQuery) {
+      setSuggestion(searchCache[searchQuery]);
+    }
+  }, 200);
+
+  return () => clearTimeout(timer);
+}, [searchQuery]);
 
 
   const getSearchSuggestion = async() =>{
@@ -26,6 +34,9 @@ const Head = () =>{
     const json = await data.json();
     console.log(json[1])
     setSuggestion(json[1])
+    dispatch(cacheResults({
+      [searchQuery]: json[1]
+    }))
   }
 
 
@@ -52,16 +63,19 @@ const Head = () =>{
             type="text"
             value = {searchQuery}
             onChange = {(e) => setSearchQuery(e.target.value)}
+            onFocus = {() => setShowSuggestion(true)}
+            onBlur = {() => setShowSuggestion(false)}  
           />
           
           <button className = "border border-gray-400 p-2 rounded-r-full bg-gray-100" >Search</button>
         </div>
-          <div className = "fixed bg-white px-100 w-[37rem] shadow-lg rounded-lg border-gray-100">
+
+         {showSuggestion && ( <div className = "fixed bg-white px-100 w-[37rem] shadow-lg rounded-lg border-gray-100">
             <ul>             
               {suggestion.map(s => <li key ={s} className = "py-2 shadow-sm border-gray-400 hover:bg-gray-100">{s}</li>
 )}
             </ul>
-          </div>
+          </div>)}
         </div>
 
         <img
