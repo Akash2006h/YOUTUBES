@@ -13,7 +13,7 @@ const WatchPage = () =>{
   },[])
 
   return(
-    <>
+   <div className = "flex flex-col">
     <div>
       <iframe width="1200" 
       height="600"
@@ -22,9 +22,9 @@ const WatchPage = () =>{
       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       
-  </div>
+     </div>
       <CommentsContainer />
-  </>
+     </div>
   )
 }
 export default WatchPage;
